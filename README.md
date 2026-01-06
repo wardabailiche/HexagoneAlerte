@@ -1,16 +1,53 @@
-# React + Vite
+❄️ Hexagone Cold Alert 2026
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Une application citoyenne d'aide à la décision en période de grand froid.
 
-Currently, two official plugins are available:
+🔗 Accéder à l'application : https://hexagonealerte-app.vercel.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+📋 À propos
 
-## React Compiler
+Développée dans le cadre du Plan d'Urgence Hivernal 2026, cette application a pour but de centraliser les informations critiques (Météo, Trafic, Transports, Tensions électriques) pour permettre aux citoyens de l'Hexagone de prendre des décisions éclairées pour leur sécurité.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+L'application offre une vue synthétique et temps réel, loin du bruit médiatique habituel, en se concentrant sur l'utilité immédiate.
 
-## Expanding the ESLint configuration
+✨ Fonctionnalités Clés
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+🗺️ Cartographie Temps Réel : Visualisation des départements en vigilance et état du trafic sur les grands axes.
+
+🌡️ Timeline Prédictive : Évolution des températures et risques (verglas, neige) heure par heure.
+
+🧠 Assistant IA : Module d'aide à la décision par profil (Parents, BTP, Télétravailleurs...).
+
+📢 Flux Unifié : Agrégation des directives officielles (Météo France, Préfectures) et des infos terrain.
+
+🛠️ Stack Technique
+
+Framework : React (Vite)
+
+Design : Tailwind CSS
+
+Cartographie : Leaflet / OpenStreetMap
+
+Icônes : Lucide React
+
+Déploiement : Vercel
+
+🚀 Comment contribuer ?
+
+Ce projet est Open Source. Toute contribution est la bienvenue pour améliorer la fiabilité des données ou l'ergonomie.
+
+Forkez le projet.
+
+Créez votre branche de fonctionnalité (git checkout -b feature/Amelioration).
+
+Committez vos changements (git commit -m 'Ajout d'une fonctionnalité').
+
+Push sur la branche (git push origin feature/Amelioration).
+
+Ouvrez une Pull Request.
+
+👩‍💻 Auteur
+
+Développé avec fraternité et résilience par Warda Bailiche Berrached, le 5 janvier 2026.
+
+Pour toute urgence vitale, composez toujours le 15 ou le 112.
