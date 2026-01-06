@@ -521,7 +521,7 @@ const TimelineWidget = ({ data }) => {
   return (
     <div className="bg-slate-800 rounded-xl border border-slate-700 p-4 shadow-xl h-full flex flex-col justify-center">
       <h3 className="text-xs text-slate-400 uppercase font-bold tracking-wider mb-4 flex items-center gap-2">
-        <Clock className="w-3 h-3" /> Projection des températures
+        <Clock className="w-3 h-3" /> Projection des températures au niveau national
       </h3>
       <div className="relative flex justify-between items-start">
         {/* Ligne connectrice */}
@@ -666,7 +666,7 @@ export default function App() {
               <ShieldAlert className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="font-bold text-lg leading-tight text-blue-100">HEXAGONE COLD ALERT 2026</h1>
+              <h1 className="font-bold text-lg leading-tight text-blue-100">HEXAGON COLD ALERT 2026</h1>
               <p className="text-xs text-blue-300">Plan d'Urgence Hivernal • Activé</p>
               <div className="text-xs text-blue-200 font-mono mt-1">Mardi 6 Janvier 2026 • 20:42</div>
             </div>
@@ -700,7 +700,7 @@ export default function App() {
              </button>
              <div className="hidden xl:flex items-center gap-2 bg-slate-900 px-3 py-1.5 rounded-full border border-slate-700">
                <Clock className="w-4 h-4 text-slate-400" />
-               <span className="font-mono text-sm">20:42 LIVE</span>
+               <span className="font-mono text-sm">14:45 LIVE</span>
              </div>
           </div>
         </div>
