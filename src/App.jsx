@@ -131,21 +131,21 @@ const MOCK_WEATHER_DATA = {
   'Hauts-de-France': { status: 'jaune', temp: '-7°C', phenomenon: 'Grand Froid', description: 'Température ressentie -14°C à Lille.' },
   'Grand-Est': { status: 'jaune', temp: '-8°C', phenomenon: 'Grand Froid', description: 'Givre épais sur les routes.' },
   'Nouvelle-Aquitaine': { status: 'vert', temp: '4°C', phenomenon: 'Pluie', description: 'Pluie froide devenant neigeuse en soirée.' },
-  'default': { status: 'vert', temp: '2°C', phenomenon: 'RAS', description: 'Situation normale.' }
+  'default': { status: 'vert', temp: '2°C', phenomenon: 'RAS', description: 'Situation normale.' },
 };
 
 const MOCK_TIMELINE_DATA = [
 { time: 'Matin', hour: '08h', temp: '-4°C', road: 'Glace', ecowatt: 'vert' },
   { time: 'Midi', hour: '12h', temp: '-1°C', road: 'Neige', ecowatt: 'orange' },
   { time: 'Soir', hour: '18h', temp: '-3°C', road: 'CRITIQUE', ecowatt: 'rouge', isPeak: true },
-  { time: 'Nuit', hour: '23h', temp: '-8°C', road: 'GEL', ecowatt: 'vert' }
+  { time: 'Nuit', hour: '23h', temp: '-8°C', road: 'GEL', ecowatt: 'vert' },
 ];
 
 const MOCK_INCIDENTS_DATA = [
  { id: 1, category: 'route', region: 'Ile-de-France', level: 'critique', title: 'N118 - FERMÉE TOUTE LA JOURNÉE', detail: 'Conditions de circulation impossibles. Plusieurs véhicules abandonnés sur la chaussée cette nuit.', time: '06:00', source: 'Sytadin' },
   { id: 2, category: 'route', region: 'Normandie', level: 'majeur', title: 'A13 - Embouteillage Verglas', detail: 'Trafic bloqué sur 15km entre Mantes et Rouen. Les saleuses ne peuvent plus passer.', time: '13:10', source: 'SAPN' },
   { id: 3, category: 'transport', region: 'Bretagne', level: 'critique', title: 'Bus Scolaires : Suspension Mercredi', detail: 'Les préfectures de Bretagne confirment qu\'aucun car scolaire ne circulera demain mercredi 7 janvier.', time: '14:00', source: 'Préfecture 35' },
-  { id: 4, category: 'route', region: 'Occitanie', level: 'modere', title: 'A75 - Neige attendue', detail: 'Fermeture préventive du tunnel de Foix possible dès ce soir.', time: '14:25', source: 'Bison Futé' }
+  { id: 4, category: 'route', region: 'Occitanie', level: 'modere', title: 'A75 - Neige attendue', detail: 'Fermeture préventive du tunnel de Foix possible dès ce soir.', time: '14:25', source: 'Bison Futé' },
 
 ];
 
@@ -155,7 +155,7 @@ const MOCK_NEWS_DATA = [
   { id: 203, source: 'Ministère Santé', category: 'meteo', type: 'directive', title: '🏥 Plan Blanc activé en IDF et Normandie', content: 'Les services d\'urgence sont saturés par les chutes sur le verglas et les pathologies liées au froid. Le SAMU demande de ne pas appeler le 15 pour des traumatismes légers mais de contacter les centres de soins de proximité.', time: '12:20' },
   { id: 204, source: 'RTE EcoWatt', category: 'meteo', type: 'media', title: '⚡ Risque de délestage Mercredi matin', content: 'La tension sur le réseau électrique atteint un seuil critique pour demain matin entre 08h et 10h. RTE appelle à réduire drastiquement la consommation dès ce soir pour éviter des coupures ciblées.', time: '11:00' },
   { id: 205, source: 'SNCF Info', category: 'transport', type: 'media', title: '🚄 Trafic TGV : Axes Ouest et Nord ralentis', content: 'Les caténaires givrées obligent les trains à circuler à vitesse réduite. Prévoir 1h30 de retard sur les liaisons Paris-Rennes et Paris-Lille. 20% des trains supprimés demain.', time: '10:15' },
-  { id: 206, source: 'Education Nationale', category: 'meteo', type: 'directive', title: '🏫 Fermeture d\'écoles confirmée pour demain', content: 'Plus de 300 établissements scolaires resteront fermés demain mercredi dans les zones les plus touchées du Nord et de l\'Ouest. Les cours seront assurés en distanciel là où le réseau internet est stable.', time: '09:30' }
+  { id: 206, source: 'Education Nationale', category: 'meteo', type: 'directive', title: '🏫 Fermeture d\'écoles confirmée pour demain', content: 'Plus de 300 établissements scolaires resteront fermés demain mercredi dans les zones les plus touchées du Nord et de l\'Ouest. Les cours seront assurés en distanciel là où le réseau internet est stable.', time: '09:30' },
 ];
 
 // --- UTILS ---
