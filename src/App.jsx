@@ -73,46 +73,9 @@ const MOCK_DEPARTMENTS_ORANGE = [
 ];
 
 const MOCK_CONSEILS_DATA = [
-  { 
-    id: 1, 
-    category: 'secours', 
-    title: 'Premiers Gestes de Secours', 
-    Icon: Heart,
-    colorClass: 'text-red-400',
-    content: "En cas d'hypothermie (frissons, confusion) : Ne pas masser la personne. La couvrir avec des couvertures chaudes (tête comprise). Donner une boisson chaude et sucrée si consciente. Appeler le 15 ou le 112." 
-  },
-  { 
-    id: 2, 
-    category: 'voiture', 
-    title: 'En Voiture : Prudence', 
-    Icon: Car,
-    colorClass: 'text-blue-400',
-    content: "Réduisez votre vitesse de 20km/h. Augmentez les distances de sécurité (x3). Si vous glissez, ne freinez pas brusquement, débrayez et contre-braquez doucement. Ayez une couverture et de l'eau dans le coffre." 
-  },
-  { 
-    id: 3, 
-    category: 'ecole', 
-    title: 'À l\'École : Bienveillance', 
-    Icon: School,
-    colorClass: 'text-pink-400',
-    content: "Les retards dus aux transports ou au verglas ne doivent pas être sanctionnés aujourd'hui. L'accueil des élèves est assuré même en cas d'annulation de bus, mais privilégiez la sécurité avant tout." 
-  },
-  { 
-    id: 4, 
-    category: 'travail', 
-    title: 'Au Travail : Flexibilité', 
-    Icon: Building,
-    colorClass: 'text-indigo-400',
-    content: "Privilégiez le télétravail si possible. Pour ceux sur site, anticipez les départs pour éviter le verglas du soir (après 18h). Assurez-vous que les accès extérieurs sont salés." 
-  },
-  { 
-    id: 5, 
-    category: 'protection', 
-    title: 'Gestes "Logiques" Oubliés', 
-    Icon: ShieldAlert,
-    colorClass: 'text-emerald-400',
-    content: "Ne bouchez jamais les aérations (risque mortel de monoxyde de carbone avec le chauffage). Chargez votre téléphone à 100% avant de sortir. Portez plusieurs couches fines plutôt qu'une seule épaisse (technique de l'oignon)." 
-  }
+  { id: 1, title: 'Bilan Humain', Icon: Heart, colorClass: 'text-red-400', content: "4 morts signalés. Si vous voyez quelqu'un dehors, appelez le 115 immédiatement. Ne passez pas votre chemin." },
+  { id: 2, title: 'Prudence Route', Icon: Car, colorClass: 'text-blue-400', content: "Évitez l'A13 et la N118. Privilégiez le télétravail demain également car le dégel n'est pas prévu avant vendredi." },
+  { id: 3, title: 'Énergie', Icon: Zap, colorClass: 'text-yellow-400', content: "Réduisez le chauffage à 18°C pour soulager le réseau national. Évitez les machines à laver entre 18h et 20h." }
 ];
 
 const MOCK_TRAFFIC_LINES = [
@@ -125,26 +88,21 @@ const MOCK_TRAFFIC_LINES = [
 ];
 
 const MOCK_WEATHER_DATA = {
-  'Bretagne': { status: 'orange', temp: '-2°C', phenomenon: 'Neige-Verglas', description: 'Chutes de neige continues. 5-10cm.' },
-  'Normandie': { status: 'orange', temp: '-1°C', phenomenon: 'Neige-Verglas', description: 'Routes secondaires impraticables.' },
-  'Ile-de-France': { status: 'orange', temp: '0°C', phenomenon: 'Neige-Verglas', description: 'Circulation très difficile. T° Ressentie -4°C.' },
-  'Hauts-de-France': { status: 'jaune', temp: '1°C', phenomenon: 'Grand Froid', description: 'Ressenti -5°C.' },
-  'Grand-Est': { status: 'jaune', temp: '-3°C', phenomenon: 'Grand Froid', description: 'Plaques de verglas locales.' },
-  'Auvergne-Rhône-Alpes': { status: 'jaune', temp: '-5°C', phenomenon: 'Avalanche', description: 'Risque 4/5 en altitude.' },
-  'Nouvelle-Aquitaine': { status: 'vert', temp: '6°C', phenomenon: 'RAS', description: 'Situation normale.' },
-  'Occitanie': { status: 'vert', temp: '8°C', phenomenon: 'RAS', description: 'Ciel dégagé.' },
-  'Paca': { status: 'vert', temp: '10°C', phenomenon: 'RAS', description: 'Mistral modéré.' },
-  'Centre-Val de Loire': { status: 'jaune', temp: '1°C', phenomenon: 'Neige', description: 'Faibles chutes.' },
-  'Pays de la Loire': { status: 'orange', temp: '-1°C', phenomenon: 'Verglas', description: 'Sols très glissants.' },
-  'Bourgogne-Franche-Comté': { status: 'jaune', temp: '-2°C', phenomenon: 'Grand Froid', description: 'Gelées généralisées.' },
-  'Corse': { status: 'vert', temp: '12°C', phenomenon: 'RAS', description: 'Soleil.' },
+   'Bretagne': { status: 'orange', temp: '-2°C', phenomenon: 'Neige-Verglas', description: 'Re-gel massif cette nuit. Routes secondaires impraticables.' },
+  'Normandie': { status: 'orange', temp: '-5°C', phenomenon: 'Grand Froid', description: 'Conditions critiques. Risque de coupures d\'eau (gel des canalisations).' },
+  'Ile-de-France': { status: 'orange', temp: '-4°C', phenomenon: 'Neige-Verglas', description: 'Plan Neige Niveau 3 maintenu. Circulation très difficile.' },
+  'Auvergne-Rhône-Alpes': { status: 'jaune', temp: '-6°C', phenomenon: 'Neige', description: '15cm de neige attendus dès demain matin.' },
+  'Hauts-de-France': { status: 'jaune', temp: '-7°C', phenomenon: 'Grand Froid', description: 'Température ressentie -14°C à Lille.' },
+  'Grand-Est': { status: 'jaune', temp: '-8°C', phenomenon: 'Grand Froid', description: 'Givre épais sur les routes.' },
+  'Nouvelle-Aquitaine': { status: 'vert', temp: '4°C', phenomenon: 'Pluie', description: 'Pluie froide devenant neigeuse en soirée.' },
+  'default': { status: 'vert', temp: '2°C', phenomenon: 'RAS', description: 'Situation normale.' }
 };
 
 const MOCK_TIMELINE_DATA = [
-  { time: 'Matin', hour: '08h', temp: '-4°C', road: 'Verglas', ecowatt: 'vert' },
-  { time: 'Midi', hour: '12h', temp: '-1°C', road: 'Neige', ecowatt: 'orange' },
-  { time: 'Soir', hour: '18h', temp: '-3°C', road: 'Critique', ecowatt: 'rouge' }, // Pic de conso
-  { time: 'Nuit', hour: '23h', temp: '-20°C', road: 'Gel', ecowatt: 'vert', isPeak: true }, // Peak cold
+  { time: 'Matin', hour: '08h', temp: '-5°C', road: 'Verglas', ecowatt: 'vert' },
+  { time: 'Midi', hour: '13h', temp: '-2°C', road: 'Givre', ecowatt: 'orange' },
+  { time: 'Soir', hour: '18h', temp: '-4°C', road: 'CRITIQUE', ecowatt: 'rouge', isPeak: true },
+  { time: 'Nuit', hour: '23h', temp: '-10°C', road: 'GEL', ecowatt: 'vert' },
 ];
 
 const MOCK_INCIDENTS_DATA = [
