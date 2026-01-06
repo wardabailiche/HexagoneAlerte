@@ -668,7 +668,7 @@ export default function App() {
             <div>
               <h1 className="font-bold text-lg leading-tight text-blue-100">HEXAGON COLD ALERT 2026</h1>
               <p className="text-xs text-blue-300">Plan d'Urgence Hivernal • Activé</p>
-              <div className="text-xs text-blue-200 font-mono mt-1">Mardi 6 Janvier 2026 • 20:42</div>
+              <div className="text-xs text-blue-200 font-mono mt-1">Mardi 6 Janvier 2026 • 14:45</div>
             </div>
           </div>
 
