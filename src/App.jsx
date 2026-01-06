@@ -64,9 +64,11 @@ const REGION_COORDS = {
 // --- CONSTANTES MOCK DATA (Renommées pour éviter les erreurs de référence) ---
 const MOCK_DEPARTMENTS_ORANGE = [
   "Nord (59)", "Pas-de-Calais (62)", "Somme (80)", "Aisne (02)", "Oise (60)",
-  "Seine-Maritime (76)", "Eure (27)", 
-  "Yvelines (78)", "Val-d'Oise (95)", "Essonne (91)", "Seine-et-Marne (77)",
-  "Eure-et-Loir (28)"
+  "Seine-Maritime (76)", "Eure (27)", "Calvados (14)", "Orne (61)", "Manche (50)",
+  "Yvelines (78)", "Val-d'Oise (95)", "Essonne (91)", "Seine-et-Marne (77)", "Paris (75)",
+  "Ille-et-Vilaine (35)", "Côtes-d'Armor (22)", "Morbihan (56)", "Finistère (29)",
+  "Mayenne (53)", "Sarthe (72)", "Loire-Atlantique (44)", "Maine-et-Loire (49)",
+  "Eure-et-Loir (28)", "Loir-et-Cher (41)", "Loiret (45)"
 ];
 
 const MOCK_CONSEILS_DATA = [
@@ -113,89 +115,47 @@ const MOCK_CONSEILS_DATA = [
 ];
 
 const MOCK_TRAFFIC_LINES = [
-  {
-    id: 'A86',
-    name: 'A86 (Super-Périphérique)',
-    status: 'slow',
-    path: [[48.93, 2.35], [48.88, 2.46], [48.84, 2.48], [48.76, 2.45], [48.75, 2.25], [48.78, 2.15], [48.87, 2.16], [48.92, 2.25]] 
-  },
-  {
-    id: 'N118',
-    name: 'N118 (Vélizy-Paris)',
-    status: 'closed',
-    path: [[48.79, 2.22], [48.70, 2.18]]
-  },
-  {
-    id: 'A13',
-    name: 'A13 (Paris-Caen)',
-    status: 'critical',
-    path: [[48.85, 2.25], [49.0, 1.5], [49.18, -0.37]]
-  },
-  {
-    id: 'A1',
-    name: 'A1 (Paris-Lille)',
-    status: 'slow',
-    path: [[48.9, 2.35], [49.5, 2.6], [50.6, 3.0]]
-  },
-  {
-    id: 'A4',
-    name: 'A4 (Paris-Strasbourg)',
-    status: 'fluid',
-    path: [[48.82, 2.4], [49.0, 4.0], [48.5, 7.7]]
-  },
-  {
-    id: 'A6',
-    name: 'A6 (Paris-Lyon)',
-    status: 'slow',
-    path: [[48.8, 2.4], [47.0, 4.8], [45.7, 4.8]]
-  },
-  {
-    id: 'RN12',
-    name: 'RN12 (Rennes-Brest)',
-    status: 'critical',
-    path: [[48.11, -1.67], [48.5, -2.7], [48.4, -4.5]]
-  }
+ { id: 'N118', name: 'N118 (Vélizy)', status: 'closed', path: [[48.79, 2.22], [48.70, 2.18]] },
+  { id: 'A13', name: 'A13 (Normandie)', status: 'critical', path: [[48.85, 2.25], [49.0, 1.5], [49.18, -0.37]] },
+  { id: 'A11', name: 'A11 (L\'Océane)', status: 'critical', path: [[48.5, 2.0], [48.0, 0.2], [47.2, -1.5]] },
+  { id: 'A86', name: 'A86 (Super-Périphérique)', status: 'slow', path: [[48.93, 2.35], [48.88, 2.46], [48.76, 2.45], [48.75, 2.25]] },
+  { id: 'RN12', name: 'RN12 (Bretagne)', status: 'critical', path: [[48.11, -1.67], [48.5, -2.7], [48.4, -4.5]] }
+
 ];
 
 const MOCK_WEATHER_DATA = {
-  'Bretagne': { status: 'orange', temp: '-2°C', phenomenon: 'Neige-Verglas', description: 'Chutes de neige continues. 5-10cm.' },
-  'Normandie': { status: 'orange', temp: '-1°C', phenomenon: 'Neige-Verglas', description: 'Routes secondaires impraticables.' },
-  'Ile-de-France': { status: 'orange', temp: '0°C', phenomenon: 'Neige-Verglas', description: 'Circulation très difficile. T° Ressentie -4°C.' },
-  'Hauts-de-France': { status: 'jaune', temp: '1°C', phenomenon: 'Grand Froid', description: 'Ressenti -5°C.' },
-  'Grand-Est': { status: 'jaune', temp: '-3°C', phenomenon: 'Grand Froid', description: 'Plaques de verglas locales.' },
-  'Auvergne-Rhône-Alpes': { status: 'jaune', temp: '-5°C', phenomenon: 'Avalanche', description: 'Risque 4/5 en altitude.' },
-  'Nouvelle-Aquitaine': { status: 'vert', temp: '6°C', phenomenon: 'RAS', description: 'Situation normale.' },
-  'Occitanie': { status: 'vert', temp: '8°C', phenomenon: 'RAS', description: 'Ciel dégagé.' },
-  'Paca': { status: 'vert', temp: '10°C', phenomenon: 'RAS', description: 'Mistral modéré.' },
-  'Centre-Val de Loire': { status: 'jaune', temp: '1°C', phenomenon: 'Neige', description: 'Faibles chutes.' },
-  'Pays de la Loire': { status: 'orange', temp: '-1°C', phenomenon: 'Verglas', description: 'Sols très glissants.' },
-  'Bourgogne-Franche-Comté': { status: 'jaune', temp: '-2°C', phenomenon: 'Grand Froid', description: 'Gelées généralisées.' },
-  'Corse': { status: 'vert', temp: '12°C', phenomenon: 'RAS', description: 'Soleil.' },
+   'Bretagne': { status: 'orange', temp: '-2°C', phenomenon: 'Neige-Verglas', description: 'Re-gel massif cette nuit. Routes secondaires impraticables.' },
+  'Normandie': { status: 'orange', temp: '-5°C', phenomenon: 'Grand Froid', description: 'Conditions critiques. Risque de coupures d\'eau (gel des canalisations).' },
+  'Ile-de-France': { status: 'orange', temp: '-4°C', phenomenon: 'Neige-Verglas', description: 'Plan Neige Niveau 3 maintenu. Circulation très difficile.' },
+  'Auvergne-Rhône-Alpes': { status: 'jaune', temp: '-6°C', phenomenon: 'Neige', description: '15cm de neige attendus dès demain matin.' },
+  'Hauts-de-France': { status: 'jaune', temp: '-7°C', phenomenon: 'Grand Froid', description: 'Température ressentie -14°C à Lille.' },
+  'Grand-Est': { status: 'jaune', temp: '-8°C', phenomenon: 'Grand Froid', description: 'Givre épais sur les routes.' },
+  'Nouvelle-Aquitaine': { status: 'vert', temp: '4°C', phenomenon: 'Pluie', description: 'Pluie froide devenant neigeuse en soirée.' },
+  'default': { status: 'vert', temp: '2°C', phenomenon: 'RAS', description: 'Situation normale.' }
 };
 
 const MOCK_TIMELINE_DATA = [
-  { time: 'Matin', hour: '08h', temp: '-4°C', road: 'Verglas', ecowatt: 'vert' },
+{ time: 'Matin', hour: '08h', temp: '-4°C', road: 'Glace', ecowatt: 'vert' },
   { time: 'Midi', hour: '12h', temp: '-1°C', road: 'Neige', ecowatt: 'orange' },
-  { time: 'Soir', hour: '18h', temp: '-3°C', road: 'Critique', ecowatt: 'rouge' }, // Pic de conso
-  { time: 'Nuit', hour: '23h', temp: '-20°C', road: 'Gel', ecowatt: 'vert', isPeak: true }, // Peak cold
+  { time: 'Soir', hour: '18h', temp: '-3°C', road: 'CRITIQUE', ecowatt: 'rouge', isPeak: true },
+  { time: 'Nuit', hour: '23h', temp: '-8°C', road: 'GEL', ecowatt: 'vert' }
 ];
 
 const MOCK_INCIDENTS_DATA = [
-  { id: 1, category: 'route', region: 'Ile-de-France', level: 'critique', title: 'N118 - Bloquée', detail: 'Coupure totale (Vélizy > Paris).', time: '12 min', source: 'Bison Futé' },
-  { id: 2, category: 'route', region: 'Normandie', level: 'majeur', title: 'A13 - Verglas', detail: 'Accident km 120. 1 voie ouverte.', time: '25 min', source: 'SAPN' },
-  { id: 3, category: 'route', region: 'Bretagne', level: 'modere', title: 'RN12 - Ralentissements', detail: 'Visibilité réduite.', time: '40 min', source: 'CRIR' },
-  { id: 4, category: 'transport', region: 'Ile-de-France', level: 'critique', title: 'Bus Scolaires', detail: 'SUSPENDUS demain (Arrêté Préfectoral).', time: '14:00', source: 'Préfecture' },
-  { id: 5, category: 'transport', region: 'Ile-de-France', level: 'majeur', title: 'RER C', levelLabel: 'Trafic Perturbé', detail: 'Retards 30-45min. Panne signalisation.', time: 'Live', source: 'SNCF' },
-  { id: 6, category: 'transport', region: 'Auvergne-Rhône-Alpes', level: 'modere', title: 'TER Alpes', detail: 'Liaisons bus de substitution annulées.', time: '15:30', source: 'SNCF' },
-  { id: 7, category: 'air', region: 'Ile-de-France', level: 'majeur', title: 'Paris-Orly (ORY)', detail: 'Dégivrage. Retards 45min au départ.', time: 'Live', source: 'ADP' },
-  { id: 8, category: 'air', region: 'Bretagne', level: 'modere', title: 'Brest (BES)', detail: 'Vols annulés vers Ouessant.', time: '10:15', source: 'Aéroport' },
+ { id: 1, category: 'route', region: 'Ile-de-France', level: 'critique', title: 'N118 - FERMÉE TOUTE LA JOURNÉE', detail: 'Conditions de circulation impossibles. Plusieurs véhicules abandonnés sur la chaussée cette nuit.', time: '06:00', source: 'Sytadin' },
+  { id: 2, category: 'route', region: 'Normandie', level: 'majeur', title: 'A13 - Embouteillage Verglas', detail: 'Trafic bloqué sur 15km entre Mantes et Rouen. Les saleuses ne peuvent plus passer.', time: '13:10', source: 'SAPN' },
+  { id: 3, category: 'transport', region: 'Bretagne', level: 'critique', title: 'Bus Scolaires : Suspension Mercredi', detail: 'Les préfectures de Bretagne confirment qu\'aucun car scolaire ne circulera demain mercredi 7 janvier.', time: '14:00', source: 'Préfecture 35' },
+  { id: 4, category: 'route', region: 'Occitanie', level: 'modere', title: 'A75 - Neige attendue', detail: 'Fermeture préventive du tunnel de Foix possible dès ce soir.', time: '14:25', source: 'Bison Futé' }
+
 ];
 
 const MOCK_NEWS_DATA = [
-  { id: 101, source: 'Météo France', category: 'meteo', type: 'directive', title: 'Bulletin de Vigilance 20h', content: 'Maintien de la vigilance ORANGE Neige-Verglas sur 12 départements. Phénomène glissant très marqué cette nuit avec regel généralisé des chaussées mouillées. Températures minimales attendues : -5°C à -10°C.', time: '20:00' },
-  { id: 102, source: 'BFM TV', category: 'transport', type: 'media', title: 'Direct Spécial Grand Froid', content: 'Reportage sur l\'A13 où la circulation commence à se figer. Les saleuses sont en action mais le verglas rend leur travail difficile. Témoignages d\'automobilistes bloqués.', time: '20:30' },
-  { id: 103, source: 'Le Monde', category: 'meteo', type: 'media', title: 'Analyse : Un épisode exceptionnel ?', content: 'Comparaison avec l\'hiver 1985. Pourquoi ce flux polaire est-il si intense et durable ? Les experts climatologues répondent.', time: '19:45' },
-  { id: 104, source: 'Le Figaro', category: 'transport', type: 'media', title: 'Transports : La RATP en difficulté', content: 'Le réseau de bus parisien quasi paralysé. Le métro reste la seule valeur sûre pour se déplacer demain matin.', time: '20:15' },
+{ id: 201, source: 'AFP / INFO CRISE', category: 'meteo', type: 'directive', title: '⚠️ Bilan Humain : 4 décès signalés', content: 'Le froid polaire a fait ses premières victimes. 2 sans-abris retrouvés en hypothermie à Paris et Lyon. Une personne âgée isolée décédée à son domicile en Normandie suite à une coupure de chauffage. Un accident sur l\'A13 lié au verglas a également coûté la vie à un conducteur ce matin.', time: '14:15' },
+  { id: 202, source: 'Météo France', category: 'meteo', type: 'directive', title: '🔮 Prévisions Demain (Mercredi 7 Janvier)', content: 'ALERTE : Un nouveau front neigeux massif arrive par le Sud-Ouest. On attend 15 à 20cm de neige sur l\'Auvergne et le Limousin d\'ici demain midi. Le gel restera permanent sur la moitié Nord avec des pointes à -15°C ressentis. Vigilance Rouge envisagée pour le Massif Central.', time: '13:45' },
+  { id: 203, source: 'Ministère Santé', category: 'meteo', type: 'directive', title: '🏥 Plan Blanc activé en IDF et Normandie', content: 'Les services d\'urgence sont saturés par les chutes sur le verglas et les pathologies liées au froid. Le SAMU demande de ne pas appeler le 15 pour des traumatismes légers mais de contacter les centres de soins de proximité.', time: '12:20' },
+  { id: 204, source: 'RTE EcoWatt', category: 'meteo', type: 'media', title: '⚡ Risque de délestage Mercredi matin', content: 'La tension sur le réseau électrique atteint un seuil critique pour demain matin entre 08h et 10h. RTE appelle à réduire drastiquement la consommation dès ce soir pour éviter des coupures ciblées.', time: '11:00' },
+  { id: 205, source: 'SNCF Info', category: 'transport', type: 'media', title: '🚄 Trafic TGV : Axes Ouest et Nord ralentis', content: 'Les caténaires givrées obligent les trains à circuler à vitesse réduite. Prévoir 1h30 de retard sur les liaisons Paris-Rennes et Paris-Lille. 20% des trains supprimés demain.', time: '10:15' },
+  { id: 206, source: 'Education Nationale', category: 'meteo', type: 'directive', title: '🏫 Fermeture d\'écoles confirmée pour demain', content: 'Plus de 300 établissements scolaires resteront fermés demain mercredi dans les zones les plus touchées du Nord et de l\'Ouest. Les cours seront assurés en distanciel là où le réseau internet est stable.', time: '09:30' }
 ];
 
 // --- UTILS ---
