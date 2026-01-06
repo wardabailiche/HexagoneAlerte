@@ -119,7 +119,7 @@ const MOCK_TRAFFIC_LINES = [
   { id: 'A13', name: 'A13 (Normandie)', status: 'critical', path: [[48.85, 2.25], [49.0, 1.5], [49.18, -0.37]] },
   { id: 'A11', name: 'A11 (L\'Océane)', status: 'critical', path: [[48.5, 2.0], [48.0, 0.2], [47.2, -1.5]] },
   { id: 'A86', name: 'A86 (Super-Périphérique)', status: 'slow', path: [[48.93, 2.35], [48.88, 2.46], [48.76, 2.45], [48.75, 2.25]] },
-  { id: 'RN12', name: 'RN12 (Bretagne)', status: 'critical', path: [[48.11, -1.67], [48.5, -2.7], [48.4, -4.5]] }
+  { id: 'RN12', name: 'RN12 (Bretagne)', status: 'critical', path: [[48.11, -1.67], [48.5, -2.7], [48.4, -4.5]] },
 
 ];
 
