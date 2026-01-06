@@ -102,7 +102,7 @@ const MOCK_TIMELINE_DATA = [
   { time: 'Matin', hour: '08h', temp: '-5°C', road: 'Verglas', ecowatt: 'vert' },
   { time: 'Midi', hour: '13h', temp: '-2°C', road: 'Givre', ecowatt: 'orange' },
   { time: 'Soir', hour: '18h', temp: '-4°C', road: 'CRITIQUE', ecowatt: 'rouge', isPeak: true },
-  { time: 'Nuit', hour: '23h', temp: '-10°C', road: 'GEL', ecowatt: 'vert' },
+  { time: 'Nuit', hour: '23h', temp: '-10°C', road: 'GEL', ecowatt: 'vert' }
 ];
 
 const MOCK_INCIDENTS_DATA = [
