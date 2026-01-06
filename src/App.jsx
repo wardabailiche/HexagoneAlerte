@@ -1,5 +1,6 @@
 import './App.css';
 import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { 
   CloudSnow, 
   Wind, 
@@ -318,6 +319,7 @@ const CrisisChat = ({weatherContext, incidentsContext}) => {
 
   return (
     <>
+      <Analytics />
       <button 
         onClick={() => setIsOpen(!isOpen)}
         className={`fixed bottom-24 right-4 z-50 p-4 rounded-full shadow-2xl transition-all duration-300 flex items-center justify-center ${isOpen ? 'bg-slate-700 text-slate-300' : 'bg-blue-600 text-white hover:bg-blue-500 hover:scale-110'}`}
