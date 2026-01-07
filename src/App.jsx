@@ -64,12 +64,13 @@ const REGION_COORDS = {
 
 // --- CONSTANTES MOCK DATA (Renommées pour éviter les erreurs de référence) ---
 const MOCK_DEPARTMENTS_ORANGE = [
-  "Nord (59)", "Pas-de-Calais (62)", "Somme (80)", "Aisne (02)", "Oise (60)",
+   "Nord (59)", "Pas-de-Calais (62)", "Somme (80)", "Aisne (02)", "Oise (60)",
   "Seine-Maritime (76)", "Eure (27)", "Calvados (14)", "Orne (61)", "Manche (50)",
   "Yvelines (78)", "Val-d'Oise (95)", "Essonne (91)", "Seine-et-Marne (77)", "Paris (75)",
   "Hauts-de-Seine (92)", "Seine-Saint-Denis (93)", "Val-de-Marne (94)",
   "Eure-et-Loir (28)", "Loir-et-Cher (41)", "Loiret (45)", "Sarthe (72)", "Mayenne (53)",
-  "Ille-et-Vilaine (35)", "Côtes-d'Armor (22)", "Morbihan (56)"
+  "Ille-et-Vilaine (35)", "Côtes-d'Armor (22)", "Morbihan (56)", "Finistère (29)",
+  "Maine-et-Loire (49)", "Indre-et-Loire (37)", "Cher (18)", "Allier (03)", "Puy-de-Dôme (63)"
 ];
 
 const MOCK_CONSEILS_DATA = [
@@ -88,38 +89,49 @@ const MOCK_TRAFFIC_LINES = [
 ];
 
 const MOCK_WEATHER_DATA = {
-   'Bretagne': { status: 'orange', temp: '-2°C', phenomenon: 'Neige-Verglas', description: 'Re-gel massif cette nuit. Routes secondaires impraticables.' },
-  'Normandie': { status: 'orange', temp: '-5°C', phenomenon: 'Grand Froid', description: 'Conditions critiques. Risque de coupures d\'eau (gel des canalisations).' },
-  'Ile-de-France': { status: 'orange', temp: '-4°C', phenomenon: 'Neige-Verglas', description: 'Plan Neige Niveau 3 maintenu. Circulation très difficile.' },
-  'Auvergne-Rhône-Alpes': { status: 'jaune', temp: '-6°C', phenomenon: 'Neige', description: '15cm de neige attendus dès demain matin.' },
-  'Hauts-de-France': { status: 'jaune', temp: '-7°C', phenomenon: 'Grand Froid', description: 'Température ressentie -14°C à Lille.' },
-  'Grand-Est': { status: 'jaune', temp: '-8°C', phenomenon: 'Grand Froid', description: 'Givre épais sur les routes.' },
-  'Nouvelle-Aquitaine': { status: 'vert', temp: '4°C', phenomenon: 'Pluie', description: 'Pluie froide devenant neigeuse en soirée.' },
+'Bretagne': { status: 'orange', temp: '-3°C', phenomenon: 'Neige-Verglas', description: 'Grosse perturbation en approche par le Finistère. Neige tenant au sol dès 19h.' },
+  'Normandie': { status: 'orange', temp: '-6°C', phenomenon: 'Grand Froid', description: 'Températures polaires. Ressenti -15°C avec le vent de Nord-Est.' },
+  'Ile-de-France': { status: 'orange', temp: '-5°C', phenomenon: 'Neige-Verglas', description: 'Nuit critique. Risque de regel immédiat sur toutes les chaussées salées.' },
+  'Auvergne-Rhône-Alpes': { status: 'jaune', temp: '-8°C', phenomenon: 'Neige', description: 'Chutes de neige continues sur les massifs. Risque d\'avalanche 4/5.' },
+  'Hauts-de-France': { status: 'orange', temp: '-9°C', phenomenon: 'Grand Froid', description: 'Bise glaciale. Température de l\'air descendue à -12°C près de Lille.' },
+  'Grand-Est': { status: 'jaune', temp: '-11°C', phenomenon: 'Grand Froid', description: 'Givre horizontal. Conditions arctiques en milieu rural.' },
+  'Nouvelle-Aquitaine': { status: 'jaune', temp: '1°C', phenomenon: 'Pluie-Verglas', description: 'Pluie tombant sur un sol gelé. Conditions extrêmement dangereuses.' },
   'default': { status: 'vert', temp: '2°C', phenomenon: 'RAS', description: 'Situation normale.' }
 };
 
 const MOCK_TIMELINE_DATA = [
-  { time: 'Matin', hour: '08h', temp: '-5°C', road: 'Verglas', ecowatt: 'vert' },
-  { time: 'Midi', hour: '13h', temp: '-2°C', road: 'Givre', ecowatt: 'orange' },
-  { time: 'Soir', hour: '18h', temp: '-4°C', road: 'CRITIQUE', ecowatt: 'rouge', isPeak: true },
-  { time: 'Nuit', hour: '23h', temp: '-10°C', road: 'GEL', ecowatt: 'vert' }
+ { time: 'Matin', hour: '08h', temp: '-6°C', road: 'Verglas', ecowatt: 'orange' },
+  { time: 'Midi', hour: '13h', temp: '-3°C', road: 'Givre', ecowatt: 'jaune' },
+  { time: 'Soir', hour: '18h', temp: '-5°C', road: 'NEIGE', ecowatt: 'rouge', isPeak: true },
+  { time: 'Nuit', hour: '23h', temp: '-12°C', road: 'GEL', ecowatt: 'orange' }
 ];
 
 const MOCK_INCIDENTS_DATA = [
- { id: 1, category: 'route', region: 'Ile-de-France', level: 'critique', title: 'N118 - FERMÉE TOUTE LA JOURNÉE', detail: 'Conditions de circulation impossibles. Plusieurs véhicules abandonnés sur la chaussée cette nuit.', time: '06:00', source: 'Sytadin' },
-  { id: 2, category: 'route', region: 'Normandie', level: 'majeur', title: 'A13 - Embouteillage Verglas', detail: 'Trafic bloqué sur 15km entre Mantes et Rouen. Les saleuses ne peuvent plus passer.', time: '13:10', source: 'SAPN' },
-  { id: 3, category: 'transport', region: 'Bretagne', level: 'critique', title: 'Bus Scolaires : Suspension Mercredi', detail: 'Les préfectures de Bretagne confirment qu\'aucun car scolaire ne circulera demain mercredi 7 janvier.', time: '14:00', source: 'Préfecture 35' },
-  { id: 4, category: 'route', region: 'Occitanie', level: 'modere', title: 'A75 - Neige attendue', detail: 'Fermeture préventive du tunnel de Foix possible dès ce soir.', time: '14:25', source: 'Bison Futé' },
-
+ { id: 1, category: 'route', region: 'Ile-de-France', level: 'critique', title: 'N118 - FERMETURE TOTALE', detail: 'Plus de 200 véhicules abandonnés entre Vélizy et Meudon. Opérations de remorquage en cours sous la neige.', time: '06:00', source: 'Sytadin' },
+  { id: 2, category: 'route', region: 'Normandie', level: 'majeur', title: 'A13 - Patinoire Géante', detail: 'Verglas noir entre Mantes et Gaillon. Trafic interrompu pour salage d\'urgence.', time: '08:15', source: 'SAPN' },
+  { id: 3, category: 'transport', region: 'Bretagne', level: 'critique', title: 'Bus Scolaires : Suspension Mercredi', detail: 'Aucun car scolaire ne circulera demain sur les 4 départements bretons.', time: '14:00', source: 'Région Bretagne' },
+  { id: 4, category: 'route', region: 'Grand-Est', level: 'modere', title: 'Col de la Schlucht fermé', detail: 'Accumulation de neige (60cm). Équipements obligatoires sur tout le massif vosgien.', time: '10:30', source: 'Bison Futé' },
+  { id: 5, category: 'transport', region: 'Ile-de-France', level: 'majeur', title: 'RER C - Caténaire Givrées', detail: 'Trafic très perturbé sur l\'axe Sud. Prévoir 1 train sur 3.', time: '11:45', source: 'SNCF' },
+  { id: 6, category: 'route', region: 'Auvergne-Rhône-Alpes', level: 'critique', title: 'A72 - Accident Multiple', detail: 'Carambolage impliquant 12 véhicules à cause du brouillard givrant vers Saint-Étienne.', time: '13:05', source: 'Vinci Autoroutes' },
+  { id: 7, category: 'transport', region: 'Nouvelle-Aquitaine', level: 'modere', title: 'Aéroport Bordeaux - Retards', detail: 'Opérations de dégivrage des pistes. Retards moyens de 45 min.', time: '09:20', source: 'BOD Airport' },
+  { id: 8, category: 'route', region: 'Paca', level: 'modere', title: 'A8 - Risque Verglas Estérel', detail: 'Chute brutale des températures. Vigilance sur les ponts.', time: '17:10', source: 'Escota' },
+  { id: 9, category: 'route', region: 'Hauts-de-France', level: 'majeur', title: 'A1 - Camions Bloqués', detail: 'Interdiction de dépasser pour les PL. Plusieurs camions en portefeuille près d\'Arras.', time: '15:30', source: 'Sanef' },
+  { id: 10, category: 'transport', region: 'Occitanie', level: 'majeur', title: 'TER Toulouse-Tarbes - Arbres', detail: 'Chutes d\'arbres sous le poids de la neige. Circulation interrompue.', time: '12:50', source: 'SNCF Occitanie' }
 ];
 
 const MOCK_NEWS_DATA = [
- { id: 201, source: 'AFP / INFO CRISE', category: 'meteo', type: 'directive', title: '⚠️ Bilan Humain : 4 décès signalés', content: 'Le froid polaire a fait ses premières victimes. 2 sans-abris retrouvés en hypothermie à Paris et Lyon. Une personne âgée isolée décédée à son domicile en Normandie suite à une coupure de chauffage. Un accident sur l\'A13 lié au verglas a également coûté la vie à un conducteur ce matin.', time: '14:15' },
-  { id: 202, source: 'Météo France', category: 'meteo', type: 'directive', title: '🔮 Prévisions Demain (Mercredi 7 Janvier)', content: 'ALERTE : Un nouveau front neigeux massif arrive par le Sud-Ouest. On attend 15 à 20cm de neige sur l\'Auvergne et le Limousin d\'ici demain midi. Le gel restera permanent sur la moitié Nord avec des pointes à -15°C ressentis. Vigilance Rouge envisagée pour le Massif Central.', time: '13:45' },
-  { id: 203, source: 'Ministère Santé', category: 'meteo', type: 'directive', title: '🏥 Plan Blanc activé en IDF et Normandie', content: 'Les services d\'urgence sont saturés par les chutes sur le verglas et les pathologies liées au froid. Le SAMU demande de ne pas appeler le 15 pour des traumatismes légers mais de contacter les centres de soins de proximité.', time: '12:20' },
-  { id: 204, source: 'RTE EcoWatt', category: 'meteo', type: 'media', title: '⚡ Risque de délestage Mercredi matin', content: 'La tension sur le réseau électrique atteint un seuil critique pour demain matin entre 08h et 10h. RTE appelle à réduire drastiquement la consommation dès ce soir pour éviter des coupures ciblées.', time: '11:00' },
-  { id: 205, source: 'SNCF Info', category: 'transport', type: 'media', title: '🚄 Trafic TGV : Axes Ouest et Nord ralentis', content: 'Les caténaires givrées obligent les trains à circuler à vitesse réduite. Prévoir 1h30 de retard sur les liaisons Paris-Rennes et Paris-Lille. 20% des trains supprimés demain.', time: '10:15' },
-  { id: 206, source: 'Education Nationale', category: 'meteo', type: 'directive', title: '🏫 Fermeture d\'écoles confirmée pour demain', content: 'Plus de 300 établissements scolaires resteront fermés demain mercredi dans les zones les plus touchées du Nord et de l\'Ouest. Les cours seront assurés en distanciel là où le réseau internet est stable.', time: '09:30' },
+ { id: 201, source: 'AFP / INFO CRISE', category: 'meteo', type: 'directive', title: '⚠️ Bilan Humain : 4 décès signalés', content: 'Le froid polaire a fait ses premières victimes. 2 sans-abris retrouvés en hypothermie à Paris et Lyon. Une personne âgée isolée décédée à son domicile en Normandie.', time: '14:15' },
+  { id: 202, source: 'Météo France', category: 'meteo', type: 'directive', title: '🔮 Alerte : Blizzard sur le Massif Central', content: 'Demain Mercredi, on attend 40cm de neige supplémentaire sur le Puy-de-Dôme. Risque de congères de 2 mètres avec le vent.', time: '15:20' },
+  { id: 203, source: 'RTE EcoWatt', category: 'energie', type: 'media', title: '🔴 SIGNAL ROUGE : Tension Réseau', content: 'Alerte maximale pour demain entre 08h et 11h. Risque de délestages tournants si la consommation ne baisse pas de 15%.', time: '16:45' },
+  { id: 204, source: 'Education Nationale', category: 'education', type: 'directive', title: '🏫 Écoles fermées dans 12 départements', content: 'La liste s\'allonge : pas de classe demain dans le Calvados, l\'Eure, et l\'ensemble de la petite couronne parisienne.', time: '17:00' },
+  { id: 205, source: 'Ministère Santé', category: 'sante', type: 'directive', title: '🏥 Plan Blanc - Saturations Urgences', content: 'Les chutes sur verglas ont provoqué +40% d\'admissions en traumatologie. Ne vous déplacez qu\'en cas d\'urgence absolue.', time: '13:00' },
+  { id: 206, source: 'SNCF Voyageurs', category: 'transport', type: 'media', title: '🚄 Plan Grand Froid : Vitesse TGV réduite', content: 'Tous les TGV circulant vers le Nord et l\'Est sont limités à 220km/h pour protéger les caténaires. Retards de 40min à 1h.', time: '11:10' },
+  { id: 207, source: 'Mairie de Paris', category: 'sante', type: 'media', title: '🏠 12 Gymnases ouverts en urgence', content: 'Le plan Grand Froid passe au niveau 3 à Paris. 500 places supplémentaires créées pour les plus vulnérables.', time: '18:15' },
+  { id: 208, source: 'GRDF', category: 'energie', type: 'media', title: '🔥 Consommation Record de Gaz', content: 'Le pic historique de 2012 est sur le point d\'être dépassé. Aucun risque de pénurie, mais tension sur le stockage.', time: '10:45' },
+  { id: 209, source: 'Bison Futé', category: 'transport', type: 'directive', title: '🛑 Interdiction PL : Axe Est-Ouest', content: 'Les poids-lourds de +7.5t sont interdits sur la RN12 et la RN157 jusqu\'à nouvel ordre.', time: '09:00' },
+  { id: 210, source: 'Le Monde / Environnement', category: 'meteo', type: 'media', title: '📉 -18°C relevés en Champagne', content: 'C\'est la nuit la plus froide du siècle pour un début janvier à Reims. Le sol est gelé sur 15cm de profondeur.', time: '08:00' },
+  { id: 211, source: 'Eurostar Info', category: 'transport', type: 'media', title: '🚄 Eurostar : Trafic limité', content: 'Conditions extrêmes dans le Pas-de-Calais. 4 trains annulés entre Paris et Londres ce soir.', time: '17:30' },
+  { id: 212, source: 'Préfecture Normandie', category: 'meteo', type: 'directive', title: '💧 Risque de coupure d\'eau potable', content: 'Le gel profond menace les canalisations anciennes. Protégez vos compteurs d\'eau immédiatement.', time: '16:00' }
 ];
 
 // --- UTILS ---
