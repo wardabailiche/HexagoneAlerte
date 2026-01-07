@@ -680,7 +680,7 @@ export default function App() {
             <div>
               <h1 className="font-bold text-lg leading-tight text-blue-100">HEXAGON COLD ALERT 2026</h1>
               <p className="text-xs text-blue-300">Plan d'Urgence Hivernal • Activé</p>
-              <div className="text-xs text-blue-200 font-mono mt-1">Mardi 6 Janvier 2026 • 14:45</div>
+              <div className="text-xs text-blue-200 font-mono mt-1">Mercredi 7 Janvier 2026 • 8:00</div>
             </div>
           </div>
 
@@ -712,7 +712,7 @@ export default function App() {
              </button>
              <div className="hidden xl:flex items-center gap-2 bg-slate-900 px-3 py-1.5 rounded-full border border-slate-700">
                <Clock className="w-4 h-4 text-slate-400" />
-               <span className="font-mono text-sm">14:45 LIVE</span>
+               <span className="font-mono text-sm">8:00 LIVE</span>
              </div>
           </div>
         </div>
