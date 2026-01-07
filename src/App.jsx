@@ -9,7 +9,7 @@ import {
   Car, 
   MapPin, 
   Clock,
-  ShieldAlert,
+  ShieldAlert, 
   AlertTriangle,
   CheckCircle2,
   Info,
@@ -354,12 +354,10 @@ const LeafletMap = ({ onSelect, selected, showTraffic }) => {
         fillOpacity: 0.8 
       }).addTo(map);
 
-      // Tooltip au survol
       circle.bindTooltip(`<div class="font-black uppercase text-[10px]">${reg}</div><div class="text-[9px] font-bold text-slate-400">${data.temp}</div>`, { direction: 'top', offset: [0, -10] });
 
-      // Popup riche sans bouton, affichage optimisé
       const popupContent = `
-        <div style="font-family: sans-serif; min-width: 260px; color: #1e293b; padding: 4px;">
+        <div style="font-family: sans-serif; min-width: 240px; color: #1e293b; padding: 4px;">
           <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-bottom: 12px;">
             <div>
               <h4 style="margin:0; font-weight: 900; color: #0f172a; text-transform: uppercase; font-size: 14px; letter-spacing: -0.02em;">${reg}</h4>
@@ -397,19 +395,20 @@ const LeafletMap = ({ onSelect, selected, showTraffic }) => {
         autoPan: true
       });
 
-      // Gestion du clic unique pour sélectionner ET ouvrir la bulle
       circle.on('click', (e) => { 
-        // Empêche la propagation si nécessaire
         L.DomEvent.stopPropagation(e);
-        // Sélectionne la région (met à jour le reste de l'interface)
         onSelect(reg);
-        // Force l'ouverture de la popup immédiatement
         e.target.openPopup();
-        // Centre la vue
         map.flyTo(data.coords, 7, { duration: 0.8 });
       });
     });
-  }, [isMapReady, showTraffic]); // On retire "selected" des dépendances pour éviter de redessiner et fermer la popup au clic
+  }, [isMapReady, showTraffic]);
+
+  useEffect(() => {
+    const handler = (e) => onSelect(e.detail);
+    window.addEventListener('select-region', handler);
+    return () => window.removeEventListener('select-region', handler);
+  }, [onSelect]);
 
   return <div ref={mapContainerRef} className="w-full h-full rounded-xl" />;
 };
@@ -423,6 +422,9 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('meteo');
   const [showTraffic, setShowTraffic] = useState(true);
   const [isDecisionModalOpen, setIsDecisionModalOpen] = useState(false);
+
+  const orangeRegions = useMemo(() => Object.entries(REGION_DATA).filter(([k, v]) => v.status === 'orange').map(([k]) => k), []);
+  const rougeRegions = useMemo(() => Object.entries(REGION_DATA).filter(([k, v]) => v.status === 'rouge').map(([k]) => k), []);
 
   const currentWeather = useMemo(() => {
     if (selectedRegion === 'all') return REGION_DATA['default'];
@@ -452,25 +454,47 @@ export default function App() {
         </div>
       </header>
 
+      {/* FLASH BAND */}
       <div className="w-full bg-red-600/10 border-b border-red-500/20 py-2.5">
           <div className="flex items-center justify-center gap-8 animate-pulse text-[11px] font-black text-red-200 uppercase tracking-widest"><Radio className="w-4 h-4 text-red-500" /> FLASH 12:30 : Blocage total A13 Rouen • Blizzard Auvergne • Télétravail dès 15h</div>
       </div>
 
-      <main className="container mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 overflow-hidden">
-        <div className="lg:col-span-5 flex flex-col gap-6">
-          <div className="bg-slate-800 p-6 rounded-3xl border border-slate-700 relative overflow-hidden group">
-            <div className={`absolute top-0 right-0 w-2 h-full ${currentWeather.status === 'rouge' ? 'bg-red-600' : 'bg-orange-600'}`}></div>
-            <div className="text-[10px] text-slate-500 font-black uppercase mb-6 tracking-widest flex items-center gap-2"><ThermometerSnowflake className="w-4 h-4 text-blue-400" /> Surveillance Temps Réel</div>
-            <div className="flex items-end gap-6 mb-4">
-              <div className="text-7xl font-black text-white tracking-tighter">{currentWeather.temp}</div>
-              <div className="pb-2">
-                <div className="text-xl font-black text-slate-200 uppercase tracking-tight">{currentWeather.phenomenon}</div>
-                <div className="text-[10px] text-slate-500 font-bold">Resenti -14°C • {selectedRegion}</div>
+      {/* BANDEAU DE VIGILANCE DES RÉGIONS (ORANGE/ROUGE) */}
+      <div className="w-full bg-slate-850 border-b border-slate-700 overflow-x-auto custom-scrollbar shadow-lg">
+        <div className="container mx-auto px-4 py-3 flex items-center gap-6 whitespace-nowrap">
+          <div className="flex items-center gap-2 shrink-0">
+            <AlertTriangle className="w-4 h-4 text-orange-500" />
+            <span className="text-[10px] font-black uppercase text-slate-400">Vigilance Territoriale :</span>
+          </div>
+          
+          {selectedRegion === 'all' ? (
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 bg-red-600/20 border border-red-500/30 px-3 py-1 rounded-full animate-pulse">
+                <span className="w-2 h-2 rounded-full bg-red-600"></span>
+                <span className="text-[10px] font-black text-red-100 uppercase">{rougeRegions.length} ROUGE ({rougeRegions.join(', ')})</span>
+              </div>
+              <div className="flex items-center gap-2 bg-orange-600/20 border border-orange-500/30 px-3 py-1 rounded-full">
+                <span className="w-2 h-2 rounded-full bg-orange-600"></span>
+                <span className="text-[10px] font-black text-orange-100 uppercase">{orangeRegions.length} ORANGE ({orangeRegions.join(', ')})</span>
               </div>
             </div>
-            <p className="text-xs text-slate-300 bg-slate-900/50 p-4 rounded-xl border border-slate-700 leading-relaxed italic">"{currentWeather.description}"</p>
-          </div>
+          ) : (
+            <div className="flex items-center gap-3">
+              <span className="text-[10px] font-bold text-white uppercase">{selectedRegion} :</span>
+              <div className={`flex items-center gap-2 px-3 py-1 rounded-full border ${currentWeather.status === 'rouge' ? 'bg-red-600/20 border-red-500/30 text-red-100 animate-pulse' : currentWeather.status === 'orange' ? 'bg-orange-600/20 border-orange-500/30 text-orange-100' : 'bg-emerald-600/20 border-emerald-500/30 text-emerald-100'}`}>
+                <span className={`w-2 h-2 rounded-full ${currentWeather.status === 'rouge' ? 'bg-red-600' : currentWeather.status === 'orange' ? 'bg-orange-600' : 'bg-emerald-600'}`}></span>
+                <span className="text-[10px] font-black uppercase tracking-widest">{currentWeather.status} • {currentWeather.phenomenon}</span>
+              </div>
+              {selectedRegion !== 'all' && (
+                <button onClick={() => setSelectedRegion('all')} className="text-[9px] font-black text-slate-500 hover:text-white uppercase transition-colors ml-4 border-l border-slate-700 pl-4 underline decoration-dotted">Vue Nationale</button>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
 
+      <main className="container mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 overflow-y-auto">
+        <div className="lg:col-span-5 flex flex-col gap-6">
           <div className="bg-slate-800 p-6 rounded-3xl border border-slate-700 shadow-xl">
              <div className="flex justify-between items-center mb-8">
                <h3 className="text-[10px] text-slate-400 font-black uppercase tracking-widest flex items-center gap-2"><Zap className="w-4 h-4 text-yellow-500" /> Écowatt • Projection Énergie</h3>
@@ -529,13 +553,22 @@ export default function App() {
         </div>
       </main>
 
-      <footer className="border-t border-slate-800 bg-slate-900 py-10">
+      <footer className="border-t border-slate-800 bg-slate-900 py-10 shrink-0">
         <div className="container mx-auto px-4 flex flex-col items-center gap-6">
-          <div className="flex items-center gap-3 text-xs text-slate-500 font-bold uppercase tracking-widest">
-            <HeartHandshake className="w-4 h-4 text-pink-500" />Mise à jour 12:30 • Warda Bailiche Berrached • Janvier 2026
+          <div className="flex flex-col items-center gap-2 text-center">
+            <div className="flex items-center gap-3 text-xs text-slate-400">
+              <HeartHandshake className="w-4 h-4 text-pink-500 animate-pulse" />
+              <p className="font-medium">
+                Développé avec fraternité et résilience par <strong>Warda Bailiche Berrached</strong>, le 5 janvier 2026.
+              </p>
+            </div>
+            <p className="text-[10px] text-slate-500 max-w-lg mx-auto leading-relaxed">
+              Pour toute fin utile à ceux impactés par cette vague de froid sur l'Hexagone. <br/>
+              Pour ceux qui souhaitent contribuer à l'amélioration de cette app, vous êtes les bienvenus.
+            </p>
           </div>
           <a href="https://wa.me/33619641396" target="_blank" rel="noreferrer" className="bg-emerald-600/10 text-emerald-400 px-8 py-4 rounded-3xl text-[10px] font-black uppercase tracking-widest border border-emerald-500/20 hover:bg-emerald-600/20 transition-all shadow-2xl">
-            <MessageCircle className="w-4 h-4 inline mr-2" /> Alerte Directe WhatsApp
+            <MessageCircle className="w-4 h-4 inline mr-2" /> Me contacter sur WhatsApp
           </a>
         </div>
       </footer>
